@@ -1,42 +1,70 @@
-import React from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import React, { useEffect, useRef } from "react";
 import Herosection from "../components/Herosection";
 import Whyus from "../components/Whyus";
+import { useScroll, useTransform, motion } from "framer-motion";
+
+import Lenis from 'lenis';
+import Whatwedo from "../components/Whatwedo";
+import Whyus2 from "../components/Whyus2";
+import Form from "../components/Form";
 
 const Home = () => {
-  const { scrollY } = useScroll();
+  
 
-  // Define scroll ranges for animations
-  const heroY = useTransform(scrollY, [0, 300], [0, -100]);
-  const heroOpacity = useTransform(scrollY, [0, 300], [1, 0]);
+  const container = useRef();
+  const { scrollYProgress } = useScroll({
+    target: container,
+    offset: ["start start", "end end"]
+  }) 
 
-  const whyY = useTransform(scrollY, [300, 600], [100, 0]);
-  const whyOpacity = useTransform(scrollY, [300, 600], [0, 1]);
+  useEffect( () => {
+    
 
+    const lenis = new Lenis({
+      duration: 1.2, // Smooth scroll duration
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Custom easing function
+      smooth: true, // Enable smooth scroll
+    });
+
+    function raf(time) {
+      lenis.raf(time)
+      requestAnimationFrame(raf)
+    }
+
+    requestAnimationFrame(raf);
+
+    return () => {
+      lenis.destroy();
+    };
+  }, [])
+
+
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    window.onbeforeunload = () => {
+      window.scrollTo(0, 0);
+    };
+  }, []);
   return (
-    <main className="w-full   ">
-      {/* Hero Section */}
-      <motion.section
-        className="bg-dark-bg flex items-center justify-center  "
-        style={{
-          x: heroY,
-          opacity: heroOpacity,
-        }}
-      >
-        <Herosection />
-      </motion.section>
-
-      {/* Why Us Section */}
-      <motion.section
-        className=" bg-light-bg flex items-center justify-center  "
-        style={{
-          y: whyY,
-          opacity: whyOpacity,
-        }}
-      >
-        <Whyus />
-      </motion.section>
+    <>
+    <main 
+    ref={container}
+    className=" relative  ">
+      
+        <Herosection scrollYProgress={scrollYProgress} />    
+        <Whyus scrollYProgress={scrollYProgress} />
+       
+        <Whyus2  scrollYProgress={scrollYProgress}/>     
+      
     </main>
+    <Whatwedo scrollYProgress={scrollYProgress} />
+    <Form />
+
+
+
+    </>
+
   );
 };
 

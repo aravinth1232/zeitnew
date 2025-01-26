@@ -1,13 +1,25 @@
 import React from "react";
-import { motion } from "framer-motion";
-import { useInView } from "react-intersection-observer";
+import { useScroll, useTransform, motion } from "framer-motion";
+import { useEffect, useRef } from "react";
+import Lenis from 'lenis';import { useInView } from "react-intersection-observer";
 import heroimage from "../assets/hero2.png";
 import { ArrowDownRight, ArrowDownUp, ArrowRightCircle, ArrowRightFromLine, ArrowUp, ChevronRight } from "lucide-react";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
-const Herosection = () => {
+const Herosection = ({scrollYProgress}) => {
+
+
+  const navigate = useNavigate();
+
+
+
+
+
+
   // Intersection Observer
   const [textRef, textInView] = useInView({ triggerOnce: true, threshold: 0.2 });
   const [imageRef, imageInView] = useInView({ triggerOnce: true, threshold: 0.2 });
+
 
   // Animation Variants
   const textVariants = {
@@ -22,10 +34,16 @@ const Herosection = () => {
     exit : { opacity: 0, x: 50 },
   };
 
+  const scale = useTransform(scrollYProgress, [0,1], [1, 0]);
+  const rotate = useTransform(scrollYProgress, [0, 1], [0, -45])
+
   return (
-    <main className="flex flex-col-reverse md:flex-row items-center justify-between p-6 md:p-12 gap-8 md:gap-16">
+    <motion.main 
+    style={{scale, rotate}}    
+    className="h-screen sticky top-0 bg-dark-bg flex flex-col-reverse md:flex-row items-start justify-between px-6 py-6 md:px-12 md:py-12 gap-8 md:gap-16">
       {/* Text Section */}
       <motion.div
+        
         ref={textRef}
         initial="hidden"
         animate={textInView ? "visible" : "hidden"}
@@ -41,7 +59,13 @@ const Herosection = () => {
           strategies to deliver measurable results.
         </p>
         
-        <button className=" relative inline-block px-4 py-2 font-bold text-red-500 bg-light-bg  hover:text-dark-text-primary  overflow-hidden group">
+       
+        <button
+        onClick={()=>{
+          navigate("/contact")
+
+        }}
+        className=" relative inline-block px-4 py-2 font-bold text-red-500 bg-light-bg  hover:text-dark-text-primary  overflow-hidden group">
       <span className="relative z-10 flex flex-row gap-4">
         <h1>Let&apos;s Connect</h1> 
         <ArrowRightFromLine />
@@ -50,6 +74,7 @@ const Herosection = () => {
       {/* Background */}
       <span className="absolute skew-x-[45deg] inset-0 w-full h-full bg-red-500 transform -translate-x-40 group-hover:translate-x-0 transition-transform duration-300 ease-out origin-right"></span>
     </button>
+    
       </motion.div>
 
       {/* Hero Image */}
@@ -67,7 +92,7 @@ const Herosection = () => {
           loading="lazy"
         />
       </motion.div>
-    </main>
+    </motion.main>
   );
 };
 

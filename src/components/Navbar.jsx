@@ -17,7 +17,7 @@ const Navbar = () => {
 
   return (
    <>
-    <header className='bg-dark-bg z-50  sticky top-0 flex flex-row justify-around items-center py-3 '>
+    <header className='bg-dark-bg z-50   flex flex-row justify-around items-center py-4 '>
 
     <Link to= "/" >
      <img 
@@ -25,7 +25,7 @@ const Navbar = () => {
      src={logo} alt="Zeit Logo" />  
     </Link>  
     
-    <nav className='flex flex-row gap-10 font-primary  '>
+    {/* <nav className='flex flex-row gap-10 font-primary  '>
       {
         links.map((link)=>(
         
@@ -38,7 +38,22 @@ const Navbar = () => {
           </Link>
         ))
       }
-    </nav>
+    </nav> */}
+
+    <Link 
+    to="/contact"
+    >
+    <button className=" relative inline-block px-4 py-2 font-bold text-red-500 bg-light-bg  hover:text-dark-text-primary  overflow-hidden group">
+      <span className="relative z-10 flex flex-row gap-4">
+        <h1>Let&apos;s Connect</h1> 
+        
+        </span>
+     
+      {/* Background */}
+      <span className="absolute skew-x-[45deg] inset-0 w-full h-full bg-red-500 transform -translate-x-40 group-hover:translate-x-0 transition-transform duration-300 ease-out origin-right"></span>
+    </button>
+
+    </Link>
       
     </header>        
 
