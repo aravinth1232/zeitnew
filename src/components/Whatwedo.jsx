@@ -59,7 +59,7 @@ const Whatwedo = ({scrollYProgress}) => {
   return (
     <motion.section
     // style={{scale, rotate}}
-    className=" bg-dark-bg relative px-6 py-6 md:px-12 md:py-12 flex flex-row items-center justify-center gap-4">
+    className=" bg-dark-bg relative px-6 py-6 md:px-12 md:py-12 flex flex-col md:flex-row md:items-center justify-center gap-4">
       <div className="  flex flex-col gap-10   ">
         <h2 className="text-4xl  text-primary-100 font-primary font-bold ">What we do ?</h2>
         <p className="text-base font-secondary text-primary-50 ">

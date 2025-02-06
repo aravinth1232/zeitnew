@@ -40,7 +40,7 @@ const Herosection = ({scrollYProgress}) => {
   return (
     <motion.main 
     style={{scale, rotate}}    
-    className="h-screen sticky top-0 bg-dark-bg flex flex-col-reverse md:flex-row items-start justify-between px-6 py-6 md:px-12 md:py-12 gap-8 md:gap-16">
+    className=" h-screen sticky top-0 bg-dark-bg flex flex-col md:flex-row items-start md:justify-between px-6 py-6 md:px-12 md:py-12 gap-7 md:gap-16">
       {/* Text Section */}
       <motion.div
         
@@ -54,7 +54,7 @@ const Herosection = ({scrollYProgress}) => {
           Empowering businesses with <br />
           cutting-edge digital marketing solutions
         </h1>
-        <p className="text-primary-50 text-sm md:text-base font-medium text-secondary">
+        <p className="text-primary-50 text-sm md:text-base font-medium text-secondary font-secondary">
           We help businesses thrive by leveraging the latest in technology and
           strategies to deliver measurable results.
         </p>

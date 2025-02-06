@@ -33,7 +33,7 @@ const Form = () => {
   ]
 
   return (
-    <section className="h-screen bg-light-bg flex gap-4  items-start  justify-between px-10 py-12">
+    <section className="h-screen bg-light-bg flex flex-col md:flex-row gap-8 md:gap-4  items-start  lg:justify-between lg:px-10 lg:py-12">
     
 
         <div className="w-full flex flex-col gap-8  rounded-xl shadow-xl px-4 py-6 ">
@@ -62,7 +62,7 @@ const Form = () => {
         </div>
 
 
-      <div className="max-w-2xl w-full flex flex-col  rounded-lg shadow-lg px-4 py-2">
+      <div className="max-w-2xl w-full flex flex-col  rounded-lg shadow-lg px-4 md:py-2">
         <h2 className="text-2xl font-primary  mb-6 text-center">
           Get a quote
         </h2>
